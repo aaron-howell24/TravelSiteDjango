@@ -1,0 +1,40 @@
+<!-- blog/templates/blog/index.html -->
+
+{% extends "blog/base.html" %}
+{% comment %} 
+
+{% block page_title %}
+    <h2>Blog Posts</h2>
+{% endblock page_title %} {% endcomment %}
+
+{% block page_content %}
+    {% block posts %}
+        <ul class="home-card-container">
+            {% for post in posts %}
+                <li class="cards__item">
+                    <div class="card">
+                        <div class="card__image"></div>
+                        <div class="card__content">
+                            <div class="card__title"><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></div>
+                            <div>
+                                <div style="flex-shrink:0">
+                                    Categories:
+                                    {% for category in post.categories.all %}
+                                    <a href="{% url 'blog_category' category.name %}">
+                                        {{ category.name }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <p>{{ post.body | slice:":400" }}...</p>
+                            <small style="text-align:right">
+                                <div>{{ post.author}}  |  {{ post.created_on.date }}</div>
+
+                            </small>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endblock posts %}
+{% endblock page_content %}

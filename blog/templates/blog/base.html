@@ -1,0 +1,25 @@
+<html> 
+<head> 
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head> 
+<body> 
+    {% include "blog/header.html" %} 
+
+    {% block page_title%}
+    {% endblock %}
+
+    <div class="main-container">
+        <div class="main-content">
+            {% block page_content %} 
+            {% endblock %} 
+        </div>
+        <div class="ad-content">
+        </div>
+    </div>
+
+    {% include "blog/footer.html" %}
+
+</body> 
+</html>
